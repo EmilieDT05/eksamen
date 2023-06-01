@@ -1,0 +1,144 @@
+<%- include('partials/header'); -%>
+<style>
+  .done-card {
+    background-color: #64c38c;
+  }
+  
+</style>
+
+<div class="forms-container">
+  <form id="todoForm">
+    <input type="text" name="name" placeholder="New To-Do" />
+    <button type="submit">Add</button>
+  </form>
+</div>
+
+<ul class="todos">
+  <% todos.forEach(todo => { %>
+  <li class="todo-card <%if(todo.done) { %> done-card <% } %>">
+    <h4><%= todo.name %></h4>
+    <!-- <p class="author"><%= user.email %></p> -->
+    <button type="button" class="edit" data-id="<%= todo._id %>">Edit</button>
+    <%if(!todo.done) { %>
+    <button type="button" class="done" data-id="<%= todo._id %>">Done</button>
+    <% } %> <%if(todo.done) { %>
+    <button type="button" class="undo" data-id="<%= todo._id %>">Undo</button>
+    <% } %>
+    <button type="button" class="delete" data-id="<%= todo._id %>">Delete</button>
+    <input type="hidden" name="todoId" value="<%= todo._id %>" />
+  </li>
+  <br />
+  <br />
+  <% }); %>
+</ul>
+
+<div class="forms-container">
+  <form id="updateForm">
+    <input type="text" name="id" placeholder="ID" />
+    <input type="text" name="name" placeholder="To-Do" />
+    <button type="submit">Update</button>
+  </form>
+</div>
+
+<script>
+  const form = document.getElementById("todoForm");
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const name = form.name.value;
+
+    try {
+      const res = await fetch("/createTodo", {
+        method: "POST",
+        body: JSON.stringify({ name }),
+        headers: { "Content-Type": "application/json" },
+      });
+
+      const data = await res.json();
+      location.reload();
+    } catch (err) {
+      console.log(err);
+    }
+  });
+
+  document.addEventListener("click", async (e) => {
+    if (e.target.classList.contains("delete")) {
+      const id = e.target.dataset.id;
+      try {
+        const res = await fetch(`/deleteTodo/${id}`, {
+          method: "DELETE",
+          headers: { "Content-Type": "application/json" },
+        });
+
+        const data = await res.json();
+      } catch (err) {
+        console.log(err);
+      }
+      location.reload();
+    } else if (e.target.classList.contains("edit")) {
+      const id = e.target.dataset.id;
+      const todoData = await fetchTodoById(id);
+
+
+      const updateForm = document.getElementById("updateForm");
+      updateForm.elements.id.value = todoData._id; // Update ID field
+      updateForm.elements.name.value = todoData.name;
+    } else if (e.target.classList.contains("done")) {
+      const id = e.target.dataset.id;
+      
+      try {
+        const res = await fetch(`/markDone/${id}`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+        });
+        const data = await res.json();
+      } catch (err) {
+        console.log(err);
+        
+      }
+      location.reload();
+    } else if (e.target.classList.contains("undo")) {
+      const id = e.target.dataset.id;
+      try {
+        const res = await fetch(`/markUndo/${id}`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+        });
+      } catch (error) {
+        console.log(error);
+      }
+      location.reload();
+    }
+  });
+
+  const updateForm = document.getElementById("updateForm");
+  updateForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const id = updateForm.elements.id.value;
+    const name = updateForm.elements.name.value;
+
+    try {
+      const res = await fetch(`/updateTodo/${id}`, {
+        method: "POST",
+        body: JSON.stringify({ name }),
+        headers: { "Content-Type": "application/json" },
+      });
+
+      const data = await res.json();
+      location.reload();
+    } catch (err) {
+      console.log(err);
+    }
+  });
+
+  async function fetchTodoById(id) {
+    try {
+      const res = await fetch(`/getTodo/${id}`);
+      const data = await res.json();
+      return data;
+    } catch (err) {
+      console.log(err);
+    }
+  }
+</script>

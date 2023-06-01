@@ -1,0 +1,74 @@
+<%- include('partials/header'); -%>
+<h1 class="tittel">Typiske trusler en server er utsatt for</h1><br><br><br>
+<h2>DDoS-angrep</h2>
+<h4>En potensiell aktør kan overbelaste serveren.</h4>
+<h4>Dette gjøres ved at det blir sendt store mengder trafikk.</h4> <br>
+<h4>For å beskytte seg kan man iplemente en DDoS-beskyttelsestjeneste eller bruke en <br> maskinvareløsning som kan skille mellom legitim trafikk og DDoS-trafikk.</h4><br><br><br>
+
+
+<h2>DoS-angrep</h2>
+<h4>Kan minne om DDoS, men forskjellen er at trafikken blir sendt til et spesifikt punkt</h4>
+<h4>Aktøren sener store menger trafikk til et spesifikt punkt på serveren</h4><br>
+<h4>For å beskytte seg kan man benytte løsninger som overvåker og oppdager uvanlig trafikk eller <br> unormal atferd, og iverksetter automatiserte tiltak for å begrense angrepet</h4><br><br><br>
+<img src="/bilder/ddos.png" width="400px" alt="Image description">
+<br><br><br>
+
+<h2>Malware og virus</h2>
+<h4>Serveren kan bli infisert med skadelig programvare.</h4>
+<h4>Dette resulterer i at en aktør kan stjele data, samt ødelegge serveren.</h4>
+<h4>I tillegg kan angriperne få kontroll over serveren</h4><br>
+<h4>For beskyttelse er det lurt å benytte en pålitelig brannmur og ta i bruk sikkerhetsløsninger som gir sanntidsbeskyttelse mot malware, inkludert skanning av nedlastede filer og e-postvedlegg</h4><br><br><br>
+
+
+
+<h2>Skripting-angrep</h2>
+<h4>En aktør finner og utnytter sårbarheter i serverens skripter.</h4>
+<h4>Dette gjør at serveren kan utføre uønsket kode</h4></h4><br>
+<h4>Sørg for å oppdatere og sikre alle webapplikasjoner, inkludert plugins, biblioteker og tilleggsprogrammer, for å tette kjente sårbarheter som kan utnyttes av skriptangrep</h4><br><br><br>
+
+
+<h1 class="tittel">Autorisering og autorisering</h1><br><br><br>
+<h2>Autentisering</h2>
+<h4>Autentisering handler om å verifisere identiteten til en bruker eller enhet som forsøker å få tilgang til et system, en applikasjon eller en ressurs. </h4>
+<h4>Dette sikrer at kun legitimerte brukere eller enheter får tillatelse til å aksessere beskyttede områder eller utføre spesifikke handlinger.</h4><br><br><br>
+
+
+<h2>Autorisering</h2>
+<h4>Autorisering refererer til prosessen med å tildele spesifikke tillatelser og rettigheter til autentiserte brukere eller enheter.</h4>
+<h4>Det bestemmer hvilke ressurser, data eller funksjoner en bruker har lov til å aksessere og hvilke handlinger de kan utføre.</h4></h4><br>
+<h4>Autorisering sikrer at brukere kun har tilgang til det som er nødvendig for deres roller og ansvarsområder, og begrenser dermed risikoen for misbruk av sensitive data eller systemer.</h4><br><br><br>
+
+
+<h1 class="tittel">Ny bruker + nøkkel</h1>
+<h4>1.	Logg inn i terminalen som eksisterende bruker med sudo-rettigheter (eller root)</h4>
+
+<h4>2.	Opprett en ny bruker ved å skrive adduser «brukernavn»</h4>
+<img src="/bilder/1.jpg" width="400px" alt="Image description">
+
+<h4>3.	Installer openssh-server hvis dette ikke allerede er gjort</h4>
+<img src="/bilder/2.png" width="400px" alt="Image description">
+
+<h4>4.	Logg inn som den nye brukeren</h4>
+<img src="/bilder/3.png" width="400px" alt="Image description">
+
+<h4>5.	Opprett en makke med navn .ssh</h4>
+<img src="/bilder/4.png" width="400px" alt="Image description">
+
+<h4>6.	Bytt lokasjon til .ssh</h4>
+<img src="/bilder/5.png" width="400px" alt="Image description">
+
+<h4>7.	Opprett authorized_keys filen</h4>
+<img src="/bilder/6.png" width="400px" alt="Image description">
+
+<h4>8.	Rediger filen for å legge til nøkkelen</h4>
+<img src="/bilder/7.png" width="400px" alt="Image description">
+
+<h4>9.	Lim in nøkkelen i filen (Husk å lagre!)</h4>
+
+<h4>10.	Gi sudorettigheter ved å kjøre sudo visudo</h4>
+<img src="/bilder/8.png" width="400px" alt="Image description">
+
+<h4>Installer node</h4>
+<img src="/bilder/9.png" width="400px" alt="Image description">
+
+<%- include('partials/footer'); -%>
